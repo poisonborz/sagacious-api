@@ -1,5 +1,5 @@
 
-## GraphQL Boilerplate
+## Sagacious API boilerplate
 
 A reasonable, well-equipped boilerplate for a GraphQL + REST API. Based on [Apollo](https://www.apollographql.com/docs/apollo-server/) + [Koa](https://devdocs.io/koa/) 
 + [Sequelize](http://docs.sequelizejs.com/), it uses a simple structure to define models, and expose both models and methods on very similar GQL/REST endpoints, 
