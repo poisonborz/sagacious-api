@@ -1,7 +1,10 @@
 
-## GraphQL Boulerplate
+## GraphQL Boilerplate
 
-A reasonable, well-equipped boilerplate for a GraphQL + REST API. Based on [Apollo](https://www.apollographql.com/docs/apollo-server/) + [Koa](https://devdocs.io/koa/) + [Sequelize](http://docs.sequelizejs.com/), it uses a simple structure to define models, and expose both models and methods on very similar GQL/REST endpoints, minimising extension overhead. Includes JWT auth and documentation generation. The example use case is simple warehouse management system.
+A reasonable, well-equipped boilerplate for a GraphQL + REST API. Based on [Apollo](https://www.apollographql.com/docs/apollo-server/) + [Koa](https://devdocs.io/koa/) 
++ [Sequelize](http://docs.sequelizejs.com/), it uses a simple structure to define models, and expose both models and methods on very similar GQL/REST endpoints, 
+minimising extension overhead. The project is dockerized (postgres db + node:10-stretch-slim) and includes JWT auth and documentation generation. 
+The example use case is simple warehouse management system.
 
 ### Usage
 
