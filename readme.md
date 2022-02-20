@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/poisonborz/sagacious-api/master/docs/graphql/template/images/logo.png?token=GHSAT0AAAAAABRYRBUXDT5YM3M6LNKHQOS4YQSI2TA">
+<img src="https://github.com/poisonborz/sagacious-api/blob/af001229047f5074118aa016ef54ab95b7b8d26e/docs/graphql/template/images/logo.png">
 
 A reasonable, robust and well-equipped GraphQL + REST API. Hanging somewehere between a boilerplate and a template, it has a lot of bells and whistles in place for a production ready API derivate.
 
