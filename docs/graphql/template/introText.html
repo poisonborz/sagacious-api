@@ -1,0 +1,31 @@
+<div class="container">
+
+    <p>For a general overview and goals of the API, see the <a href="https://api.acmecorp.com/docs/public">General API
+        docs</a> </p>
+
+    <h2>About this documentation</h2>
+    <p>This is a listing of the GraphQL API endpoints - additional endpoints for extended functionality (Sales, R&D cockpit / Analytics) will follow.</p>
+    <p>The API exposes most entities and properties listed to REST endpoints - for syntax, refer to the <a href="https://api.acmecorp.com/docs/rest">">REST
+        docs</a>.</p>
+    <br>
+    <p>Authorization is not part of this API endpoint. For that, please refer to the <a href="https://api.acmecorp.com/docs/public">General API
+        docs</a>.</p>
+    <p>Any GraphQL endpoint is only accessible with a valid access token (authorization header).</p>
+
+
+    <h2>A very short intro on the buildup</h2>
+        <br>
+        <p><b>Groups</b></p>
+        <p>In the Sagacious system, groups provide an organisational structure that contain entities like assets (tracked tools, machines) or users.
+        Groups can form tree hierarchies, where higher level groups have visibility over all subgroups and their entities.</p>
+        <p>Additionally, groups in different hierarchies may have visibility over assets that they created. This way situations can be covered like:</p>
+
+        <p><b>The most important entity types:</b></p>
+        <ul class="clist">
+            <li>Groups have users and assets, providing visibility/access controls</li>
+            <li>Users have a role with possible rights to which resources or interface components they can access</li>
+            <li>Assets are either tracked (have connected Modules) or are inventory/commodity items</li>
+        </ul>
+
+       <p> All above elements can be managed and customized on the apps and through the API.</p>
+    </div>

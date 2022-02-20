@@ -1,0 +1,2 @@
+-- Empty baseline file to signal empty
+-- baseline structure at version 1

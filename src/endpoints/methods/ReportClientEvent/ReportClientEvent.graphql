@@ -1,0 +1,22 @@
+
+type Mutation {
+    """
+    Allows reporting adhoc client events to be tracked on ab analytics platform.
+    Supply your platform key in the header as 'x-analytics-key'.
+    """
+    reportClientEvent (
+        eventAction: String!
+        eventCategory: String!
+        eventLabel: String
+        eventValue: String
+    ): Boolean
+
+    """
+    Allows reporting adhoc client pageviews to be tracked on Google Analytics.
+    Supply your Google Analytics key in the header as 'x-analytics-key'.
+    """
+    reportClientPageview (
+        pageviewPath: String!
+        pageviewTitle: String!
+    ): Boolean
+}

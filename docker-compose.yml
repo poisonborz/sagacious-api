@@ -1,0 +1,77 @@
+version: "3.5"
+
+services:
+
+    api-mysql:
+        image: mysql:8
+        command: |-
+            --character-set-server=utf8mb4
+            --collation-server=utf8mb4_unicode_ci
+        environment:
+            - MYSQL_HOST=api-mysql
+            - MYSQL_DATABASE=sagacious
+            - MYSQL_ROOT_PASSWORD=abc123
+        ports:
+            - "${PORT_BASE:-2}3306:3306"
+        volumes:
+            - api-mysql:/var/lib/mysql
+        networks:
+            - sagacious
+
+    api:
+        image: node:14-slim
+        command: npm run ${START_COMMAND:-dev}
+        working_dir: /app
+        environment:
+            - NODE_ENV=development
+            - DBURL=${DB_HOST:-host.docker.internal}
+            - DBPORT=${DB_PORT:-23306}
+            - DBNAME=sagacious
+            - DBUSER=root
+            - HOST=0.0.0.0
+            - PORT=8080
+            - LOCAL_TRANSIENT_DIR=/app/temp/
+            - AWS_REGION=eu-central-1
+            - AWS_BUCKET=<BUCKET ADDRESS>
+            - TOKEN_EXPIRATION=3m
+            - TOKEN_REFRESH_EXPIRATION=45d
+            - WEB_ORIGIN=http://localhost:${PORT_BASE:-4}080
+            - SMTP_HOST=<SMTP_HOST>
+            - SMTP_PORT=555
+            - ANALYTICS_KEY=<ANALYTICS_KEY>
+        ports:
+            - "${PORT_BASE:-4}085:8080"
+            - "9229:9229"
+        volumes:
+            - ./:/app:delegated
+        depends_on:
+            - api-mysql
+        networks:
+            - sagacious
+
+    migrations:
+        build: ./migrations/
+        command: migrate
+        environment:
+            - DBHOST=${DB_HOST:-host.docker.internal}
+            - DBPORT=${DB_PORT:-23306}
+            - DBNAME=${DBNAME:-sagacious}
+            - DBPASS=${DBPASS}
+            - DBUSER=${DBUSER:-root}
+            - FLYWAY_BASELINE_ON_MIGRATE=false
+            - FLYWAY_CLEAN_DISABLED=true
+        volumes:
+            - ./migrations/conf:/flyway/conf
+            - ./migrations/sql:/flyway/sql
+        depends_on:
+            - api-mysql
+        networks:
+            - sagacious
+
+
+volumes:
+    api-mysql:
+
+networks:
+    sagacious:
+        name: sagacious

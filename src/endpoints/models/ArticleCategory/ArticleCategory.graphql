@@ -1,0 +1,45 @@
+
+type ArticleCategory {
+    id: HashedId!
+    name: Translation
+    nameId: HashedId!
+    "Group to which the category belongs to"
+    group: Group
+    groupId: HashedId
+    "Image (url) for this category. Should also be used for articletype or article image if they don't have it provided"
+    image: String
+    created: Timestamp
+    updated: Timestamp
+}
+
+type Query {
+    "Article category describes what the articles contained in it are - eg. wall saw, floor cleaner, hammer."
+    articleCategory (id: [HashedId]): [ArticleCategory!]
+}
+
+type Mutation {
+
+    createArticleCategory(
+        groupId: HashedId
+        name: TranslationInput!
+    ): [ArticleCategory!]
+
+    updateArticleCategory(
+        id: HashedId!
+        groupId: HashedId
+        name: TranslationInput
+    ): [ArticleCategory!]
+
+    deleteArticleCategory(
+        id: HashedId!
+    ): [Boolean!]
+
+    """
+    Accepts jpg, gif, png. Will be contained to a 500px square with white background. 3 images generated:
+    - _2x for high dpi screens
+    - no suffix, half of the default size, this url will be provided
+    - _thumb - 100px thumbnail
+    Send an empty value to remove the image.
+    """
+    updateArticleCategoryImage(id: HashedId!, file: Upload!): File!
+}

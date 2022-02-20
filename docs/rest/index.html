@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width" name="viewport">
+	<title> Sagacious REST API Documentation</title>
+    <link rel="shortcut icon" href="images/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css" />1
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+</head>
+
+
+<body>
+
+<div class="headStrip">
+    <div class="wrap">
+        <div class="head">
+            Sagacious REST API Documentation
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+
+    <div class="content">
+
+        <p>For a general overview and goals of the API, see the <a href="https://api.acmecorp.com/docs/public">General API
+            docs</a>
+        </p>
+
+        <h2>About this documentation</h2>
+
+        <p>
+            The Sagacious REST API follows those of the GraphQL endpoints. Since underlying data structures are the same,
+            and GraphQL's schemes lend themselves to self-documentation better, the full list of endpoints to query, post to, and their return value
+             in the <a href="https://api.acmecorp.com/docs/graphql">GraphQL documentation</a>.
+        </p>
+
+        <p>
+            This page details the syntax to access same endpoints, and the different methods or property results, if any.
+        </p>
+
+        <p>
+            Authorization is not part of this API endpoint. For that, please refer to the <a href="https://api.acmecorp.com/docs/public">General API docs</a>.
+        </p>
+
+        <p>Any REST endpoint is only accessible with a valid access token (authorization header).</p>
+
+        <h2>General</h2>
+
+        <span class="sub">Queries / GET requests</span> - any entity is queryable with GET requests in the usual REST manner,
+        using its usual singular term. All parameters are passed as is. Multiple parameter values, like ids are separated with commas.
+
+        <p class="url">https://api.acmecorp.com/rest<span class="url--main">/asset/?id=gX4a3F8O,7MGdFR4m</span></p>
+        <p class="url">https://api.acmecorp.com/rest<span class="url--main">/group/?id=4DFdF88m&getAllChildren=true</span></p>
+
+        <p>Methods will map the same way as entity calls:</p>
+
+        <p class="url">https://api.acmecorp.com/rest<span class="url--main">/setLastReadLoginInterrupt/?loginInterruptId=F8OdghF4</span></p>
+
+        <span class="sub">Mutations / POST requests</span> - for the sake of simplicity, and since methods are explicitly named,
+        all mutating queries are performed using only POST requests - values should be sent as x-www-form-urlencoded,
+        except for file content, which should use multipart/form-data.
+
+        <p class="url">https://api.acmecorp.com/rest<span class="url--main">/createUser/?firstName=John&lastName=Smith ... </span></p>
+    </div>
+
+</div>
+
+<script src="scripts/rainbow-custom.min.js"></script>
+
+</body>
+</html>

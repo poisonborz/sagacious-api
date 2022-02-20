@@ -1,0 +1,16 @@
+{
+    "name": "Sagacious API",
+    "schemaPath": "./schema.graphql",
+    "extensions": {
+        "endpoints": {
+            "API": {
+                "url": "http://localhost:4085/graphql",
+                "headers": {
+                    "user-agent": "JS GraphQL",
+                    "Authorization": "to be filled with schema-only capability token"
+                },
+                "introspect": true
+            }
+        }
+    }
+}

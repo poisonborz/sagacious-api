@@ -1,0 +1,83 @@
+
+"""
+Groups are the basic organisational structures of the Sagacious system.
+They are the entites that bind together users, articles and their properties, and are the unit of visibility
+and authorization. Groups form independent tree hierarchies - they may have parent groups and subgroups.
+
+Visibility of both articles and users is downwards-only.
+
+Group hierarchies can have a relation to each other connecting any two groups between the two tree structures.
+The connections describe transfer and visibility to resources, currently articles.
+A real world example would be the hierarchy Acme Corp -> Acme West -> Acme Germany. Acme Germany sells an article to
+Excel Corp, which may or may not exist in the TS System. When it does, Acme Corp would still like to supervise
+the article for error events - the relation which the transfer created provides this access.
+"""
+type Group {
+    id: HashedId!
+    name: String!
+    roleIds: [HashedId!]
+    "Roles that exist within this group"
+    roles: [Role!]
+    "The group above the selected group in the hierarchy"
+    parentGroup: Group
+    parentGroupId: HashedId
+    "The root group's name in the group's hierarchy. Returns null if the group is a root group"
+    rootGroupName: String
+    "The groups below the selected group in the hierarchy"
+    childGroups: [Group!]
+    childGroupIds: [HashedId!]
+    "Users currently assigned to this group"
+    users: [User!]
+    userIds: [HashedId!]
+    "Articles currently assigned to this group"
+    articles: [Article!]
+    articleIds: [HashedId!]
+    "Image (url) for this group - eg. company logo or picture"
+    image: String
+    created: Timestamp
+    updated: Timestamp
+}
+
+type Query {
+    """
+    - no parameters: returns all direct children including own group
+    @id: Returns groups requested in the id array
+    @getAll: Returns the full group tree for the user, regardless of the custom view group settings (see docs intro)
+    @getAllChildren: Return all descendents of this group in addition to the group
+    @related: Return all related groups of this group (all groups which have an article which also belongs to this group)
+    """
+    group (
+        id: [HashedId!]
+        getAll: Boolean
+        getAllChildren: Boolean
+        related: Boolean
+    ): [Group!]
+}
+
+type Mutation {
+
+    createGroup (
+        name: String!
+        parentGroupId: HashedId!
+        groupTypeId: HashedId
+    ): [Group!]
+
+    updateGroup (
+        id: HashedId!
+        name: String
+        parentGroupId: HashedId
+    ): [Group!]
+
+    deleteGroup (
+        id: HashedId!
+    ): [Boolean!]
+
+    """
+    Accepts jpg, gif, png. Will be contained to a 500px square with white background. 3 images generated:
+    - _2x for high dpi screens
+    - no suffix, half of the default size, this url will be provided
+    - _thumb - 100px thumbnail
+    Send an empty value to remove the image.
+    """
+    updateGroupImage(id: HashedId!, file: Upload!): File!
+}

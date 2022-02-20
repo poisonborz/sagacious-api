@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta content="width=device-width" name="viewport">
+    <link rel="icon" href="logo.png" />
+    <title>Sagacious API</title>
+    <style>
+        body {
+            color: #333
+        }
+
+        a {
+            color: #333;
+             text-decoration: none;
+            border-bottom: 1px solid #333;
+            display: inline-block;
+            line-height: 0.85;
+        }
+
+        .box {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .box img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .box span {
+            display: inline-block;
+            margin: 2px 0;
+            padding: 2px 4px;
+            font-size: 18px;
+            font-family: monospace;
+            background: #E9E8E7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <img id="logo" src="logo.svg" alt="">
+
+    <h2>Sagacious API</h2>
+    <p>Get your token on the <span>/auth</span> public endpoint (<a href="/docs/public">doc</a>)<br>
+        and start making queries on <span>/graphql</span> (<a href="/docs/graphql">doc</a>) or <span>/rest</span> (<a href="/docs/rest">doc</a>)</p>
+</div>
+
+</body>
+
+</html>

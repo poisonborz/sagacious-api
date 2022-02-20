@@ -1,0 +1,47 @@
+
+"File object for uploading"
+type File {
+    id: ID!
+    path: String!
+    filename: String!
+    mimetype: String!
+}
+
+"Input Translation type. See Translation type."
+input TranslationInput {
+    id: HashedId
+    en_us: String
+    de_de: String
+    languages: [InputTranslationItem]
+}
+
+input InputTranslationItem {
+    id: HashedId
+    code: String
+    text: String
+}
+
+type TranslationItem {
+    id: HashedId
+    code: String
+    text: String
+}
+
+input TranslationNameInput {
+    id: HashedId
+    en_us: Name
+    de_de: Name
+    languages: [InputTranslationNameItem]
+}
+
+input InputTranslationNameItem {
+    id: HashedId
+    code: String
+    text: Name
+}
+
+type TranslationNameItem {
+    id: HashedId
+    code: String
+    text: Name
+}

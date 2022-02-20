@@ -1,0 +1,28 @@
+"""
+Every user in the system has a single role - a personae with specific goals - eg. manager,
+sales person, engineer. Roles have capabilities that describe tasks a user can accomplish. Roles are specific to groups.
+"""
+type Role {
+    id: HashedId!
+    name: Translation
+    nameId: HashedId
+    "Simple reference name of the role"
+    key: String
+    ownedByGroup: Group
+    ownedByGroupId: HashedId
+    created: Timestamp
+    updated: Timestamp
+}
+
+type Query {
+    role (id: [HashedId!]): [Role!]
+}
+
+type Mutation {
+    createRole (
+        ownedByGroupId: HashedId!
+    ): Role
+    updateRole (
+        ownedByGroupId: HashedId!
+    ): Role
+}

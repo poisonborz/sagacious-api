@@ -1,0 +1,71 @@
+
+"""
+Defines an agent using the Sagacious system.
+Users may use the provided apps by Sagacious, or acquire an API key to query the system directly.
+"""
+type User {
+    id: HashedId!
+    firstname: String
+    lastname: String
+    email: String!
+    "The role of the user. Can affect the result of certain api requests / operations"
+    role: Role!
+    roleId: HashedId!
+    "The default language for the user"
+    languageId: HashedId!
+    belongsToGroup: Group!
+    belongsToGroupId: HashedId!
+    password: String
+    phone: String
+    "User avatar image in square format (url)"
+    image: String
+    language: HashedId
+    created: Timestamp!
+    "If the user logged in at least once, thus creating his password"
+    activated: String
+    updated: Timestamp
+    settings: JSON
+}
+
+type Query {
+    user(id: [HashedId!]): [User!]
+    "Method to check the validity of the user password"
+    checkPassword(password: String!): Boolean!
+}
+
+type Mutation {
+    createUser(
+        firstname: String
+        lastname: String
+        password: String
+        email: String!
+        roleId: HashedId!
+        phone: String
+        languageId: HashedId!
+        belongsToGroupId: HashedId!
+        activationRoute: String
+    ): [User!]
+    updateUser(
+        id: HashedId!
+        firstname: String
+        lastname: String
+        password: String
+        email: String
+        roleId: HashedId
+        languageId: HashedId
+        phone: String
+        belongsToGroupId: HashedId
+    ): [User]
+
+    "Delete one or more users from the system. This removes them from their associations, like Rules."
+    deleteUser(id: [HashedId!]!): [Boolean!]
+
+    """
+    Accepts jpg, gif, png. Will be contained to a 500px square with white background. 3 images generated:
+    - _2x for high dpi screens
+    - no suffix, half of the default size, this url will be provided
+    - _thumb - 100px thumbnail
+    Send an empty value to remove the image.
+    """
+    updateUserImage(id: HashedId!, file: Upload!): File!
+}

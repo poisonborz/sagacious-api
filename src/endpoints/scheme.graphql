@@ -1,0 +1,15 @@
+
+# import * from "./scalars/scalars.graphql"
+# import Query.*, Mutation.*, * from "./commonTypes.graphql"
+
+# import Query.*, Mutation.*, * from "./methods/ReportClientEvent/ReportClientEvent.graphql"
+
+
+# import Query.*, Mutation.*, * from "./models/User/User.graphql"
+# import Query.*, Mutation.*, * from "./models/ArticleCategory/ArticleCategory.graphql"
+# import Query.*, Mutation.*, * from "./models/Article/Article.graphql"
+# import Query.*, Mutation.*, * from "./models/Translation/Translation.graphql"
+# import Query.*, Mutation.*, * from "./models/Group/Group.graphql"
+# import Query.*, Mutation.*, * from "./models/ArticleType/ArticleType.graphql"
+# import Query.*, Mutation.*, * from "./models/Role/Role.graphql"
+# import Query.*, Mutation.*, * from "./models/Language/Language.graphql"

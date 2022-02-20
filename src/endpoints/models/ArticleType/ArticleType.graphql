@@ -1,0 +1,49 @@
+
+"""
+Types of articles are specific models in an article category, like 'AFD 1001', 'Turbo 100' to the
+category 'Pressure washer'.
+"""
+type ArticleType {
+    id: HashedId!
+    nameId: HashedId!
+    name: Translation
+    "Listed to users outside this group hierarchy - 'publicly' available. May be used for not yet released models"
+    groupId: HashedId!
+    inArticleCategoryId: HashedId!
+    inArticleCategory: ArticleCategory
+    "Image (url) for this article type. Should also be used for article if it doesn't have one provided"
+    image: String
+    created: Timestamp
+    updated: Timestamp
+}
+
+type Query {
+    articleType (id: [HashedId!] name: String): [ArticleType!]
+}
+
+type Mutation {
+
+    createArticleType (
+        inArticleCategoryId: HashedId!
+        name: TranslationInput!
+        groupId: HashedId
+    ): [ArticleType]
+
+    updateArticleType (
+        id: HashedId!
+        inArticleCategoryId: HashedId
+        name: TranslationInput
+        groupId: HashedId
+    ): [ArticleType]
+
+    deleteArticleType (id: HashedId!): [Boolean]
+
+    """
+    Accepts jpg, gif, png. Will be contained to a 500px square with white background. 3 images generated:
+    - _2x for high dpi screens
+    - no suffix, half of the default size, this url will be provided
+    - _thumb - 100px thumbnail
+    Send an empty value to remove the image.
+    """
+    updateArticleTypeImage(id: HashedId!, file: Upload!): File!
+}

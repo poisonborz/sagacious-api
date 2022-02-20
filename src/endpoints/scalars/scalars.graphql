@@ -1,0 +1,15 @@
+
+"A String representing the id of a model"
+scalar HashedId
+
+"UTC Unix timestamp in ms"
+scalar Timestamp
+
+"A valid JSON string"
+scalar JSON
+
+"A string containing at least one non-whitespace character"
+scalar Name
+
+"Placeholder for Apollo's Upload implementation"
+scalar Upload

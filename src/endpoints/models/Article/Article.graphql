@@ -1,0 +1,66 @@
+
+"An article is any item handled in the Sagacious system. They represent items in a warehouse."
+type Article {
+    id: HashedId!
+    "Unique identifier of this article, perhaps supplied by the supplier."
+    serial: String!
+    "Arbitrary user-defined text information to describe an Article"
+    descriptionId: HashedId
+    description: Translation
+    createdByGroup: Group!
+    createdByGroupId: HashedId!
+    assignedToGroup: Group!
+    assignedToGroupId: HashedId!
+    articleType: ArticleType!
+    articleTypeId: HashedId!
+    articleCategory: ArticleCategory!
+    articleCategoryId: HashedId!
+    relatedGroups: [RelatedGroup!]
+    created: Timestamp!
+    "Image (url) for this article"
+    image: String
+    updated: Timestamp
+}
+
+type RelatedGroup {
+    id: HashedId!
+    name: String!
+    depth: Int!
+}
+
+type Query {
+    article (
+        id: [HashedId!]
+        serial: [String!]
+    ): [Article!]
+}
+
+
+type Mutation {
+    createArticle (
+        serial: String!
+        articleTypeId: HashedId!
+        assignedToGroupId: HashedId
+        description: TranslationInput
+    ): [Article!]
+
+    updateArticle (
+        id: HashedId!
+        serial: String
+        "Set this to update the site's type"
+        articleTypeId: HashedId
+        assignedToGroupId: HashedId
+        description: TranslationInput
+    ): [Article!]
+
+    deleteArticle (id: HashedId!): [Boolean]
+
+    """
+    Accepts jpg, gif, png. Will be contained to a 500px square with white background. 3 images generated:
+    - _2x for high dpi screens
+    - no suffix, half of the default size, this url will be provided
+    - _thumb - 100px thumbnail
+    Send an empty value to remove the image.
+    """
+    updateArticleImage(id: HashedId!, file: Upload!): File!
+}

@@ -1,0 +1,13 @@
+
+"""
+A generic i18l table providing language strings for every user-created content in various languages, with simple
+id-to-string linking.
+"""
+type Translation {
+    id: HashedId!
+    languages: [TranslationItem]
+}
+
+type Query {
+    translation (id: [HashedId!]!): [Translation!]
+}

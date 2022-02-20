@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width" name="viewport">
+	<title>Sagacious API Documentation</title>
+    <link rel="shortcut icon" href="images/logo.png"/>
+
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/rainbow.css" />
+</head>
+
+
+<body>
+
+<div class="headStrip">
+    <div class="wrap">
+        <div class="head">
+            Sagacious API Documentation
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+
+    <div class="content">
+        <p>The <b>Sagacious API</b> is an extensive window to your warehouse. The system allows querying and management of various types of assets, asset data, analysis, inventory in an adaptable way to any organisational structure.</p>
+
+        <p>This page has general info and public endpoints. To see what data the API currently offers, view the <a href="https://api.acmecorp.com/graphql/">GraphQL docs</a>.</p>
+
+
+        <h2>API usage</h2>
+
+
+        <p>Both the GraphQL and REST API available only to authenticated users / API clients and require an <b>authentication</b>
+            header containing the <b>access token</b> on each request.</p>
+
+        <p>Getting authentication and requesting general data is happening through the public REST
+            endpoints described below.</p>
+
+        <h3>Authentication</h3>
+
+        <p class="url">https://api.acmecorp.com<span class="url--main">/auth</span></p>
+
+        <p>
+            <span class="highlight">POST</span>
+            Send a user-inputted <span class="sub">name</span> and a <span class="sub">password</span> value
+            as x-www-form-urlencoded to this endpoint to receive the following response:
+        </p>
+
+        <pre><code data-language="javascript">
+    {
+        "tokenAccess": "...", // the access token used to make operation requests
+        "tokenRefresh": "..." // the refresh token used to request new access tokens
+        "user": { // user object for display
+            "id": "7MGdFR4m", // id-s are hashed
+            "email": "johnsmith@company.com",
+            "roleId": "gX4a3F8O",
+            "firstname": "John",
+            "lastname": "Smith",
+            "created": "2019-01-01T10:00:00.000Z",
+            "image": "...", // url to a 250x250px jpg image. Use _2x postfix filename for hdpi version.
+            "belongsToGroupId": "44pCFxZW",
+            "roleKey": "ManufacturerUser" // role key. can be used to switch role-dependent layouts.
+        }
+    }
+        </code></pre>
+
+        <p>The response contains the access token - this should be placed as the value of header named
+            <b>authorization</b>
+            for each request to the endpoints.</p>
+
+        <p>The access tokens have a lifespan of <b>10 minutes</b>, so you need to continually refresh them using the
+            /authRefresh endpoint.</p>
+
+        <p class="url">https://api.acmecorp.com<span class="url--main">/authRefresh</span></p>
+
+        <p>
+            <span class="highlight">POST</span> Using the tokenRefresh token above, send a <span class="sub">refresh</span> value as x-www-form-urlencoded to
+            this endpoint to receive an object containing a single <b>tokenAccess</b> property similar to above, which you can
+            use to make further operation requests.
+        </p>
+
+        <pre><code data-language="javascript">
+    {
+        "tokenRefresh": "...", // the refresh token received during authentication
+    }
+        </code></pre>
+
+        <p>
+            The refresh tokens have a lifespan of <b>45 days</b>, after which your users need to log in again.
+        </p>
+
+
+        <h3>Registration</h3>
+
+        <p style="opacity: .3" class="url">https://api.acmecorp.com<span class="url--main">/registration</span></p>
+
+        <p>Currently creation of users is either happening through the API, or through Sagacious admins
+            (for the first users). In the near future clients will be able to allow free registration for new users through invitation links /
+            registration codes.</p>
+
+        <h3>Let's start querying!</h3>
+
+        <p>Both the <a href="https://api.acmecorp.com/graphql/">GraphQL</a> and <a href="https://api.acmecorp.com/rest/">
+            REST</a> endpoints expose mostly the same underlying strucxture, in their respective query formats.</p>
+
+        <h4>
+            Refer to the <a href="https://api.acmecorp.com/docs/graphql/">GraphQL docs</a> for the structural overview and
+            full description of each entity and their properties, methods, and return values, while the <a href="https://api.acmecorp.com/docs/rest/">
+            REST docs</a> describes the syntax for the REST syntax necessary to access the same data structures.
+        </h4>
+
+
+        <h3>Special header options</h3>
+        <p>
+            <b>current-group-id</b> - set this header value to any group id below the user's original group in the tree  - this way, the response
+            will reflect if the user would be assigned to that group, and return entities for that or below that group. Handy for
+            "view change" functionality where an app presents a group tree where the user can switch between groups.
+        </p>
+
+    </div>
+
+</div>
+
+<script src="scripts/rainbow-custom.min.js"></script>
+<script>
+    Rainbow.color()
+</script>
+</body>
+</html>
